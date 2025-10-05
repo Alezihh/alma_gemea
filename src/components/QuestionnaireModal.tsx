@@ -111,20 +111,20 @@ export default function QuestionnaireModal({ open, onOpenChange, onComplete }: Q
       case 1:
         return (
           <div className="space-y-6 text-center">
-            <div className="w-16 h-16 mx-auto rounded-full bg-gradient-pink flex items-center justify-center animate-pulse">
-              <User className="w-8 h-8 text-white" />
+            <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto rounded-full bg-gradient-pink flex items-center justify-center animate-pulse">
+              <User className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground animate-fade-in-up">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-foreground animate-fade-in-up">
               Qual é o seu nome?
             </h2>
-            <p className="text-muted-foreground animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
+            <p className="text-sm sm:text-base text-muted-foreground animate-fade-in-up" style={{ animationDelay: '0.1s' }}>
               Como você gostaria de ser chamado(a)?
             </p>
             <Input
               value={formData.name}
               onChange={(e) => updateField("name", e.target.value)}
               placeholder="Digite seu nome completo"
-              className="bg-black/30 border-white/20 text-white placeholder:text-gray-400 animate-fade-in-up transition-all duration-300 focus:scale-105 focus:border-primary/50 focus:bg-black/50"
+              className="bg-black/30 border-white/20 text-white placeholder:text-gray-400 animate-fade-in-up transition-all duration-300 focus:scale-105 focus:border-primary/50 focus:bg-black/50 text-sm sm:text-base"
               style={{ animationDelay: '0.2s' }}
               autoFocus
             />
@@ -134,20 +134,20 @@ export default function QuestionnaireModal({ open, onOpenChange, onComplete }: Q
       case 2:
         return (
           <div className="space-y-6 text-center">
-            <div className="w-16 h-16 mx-auto rounded-full bg-gradient-pink flex items-center justify-center">
-              <Calendar className="w-8 h-8 text-white" />
+            <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto rounded-full bg-gradient-pink flex items-center justify-center">
+              <Calendar className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-foreground">
               Quando você nasceu?
             </h2>
-            <p className="text-muted-foreground">
+            <p className="text-sm sm:text-base text-muted-foreground">
               Sua data de nascimento é essencial para análise
             </p>
             <Input
               type="date"
               value={formData.birthdate}
               onChange={(e) => updateField("birthdate", e.target.value)}
-              className="bg-black/30 border-white/20 text-white focus:border-primary/50 focus:bg-black/50"
+              className="bg-black/30 border-white/20 text-white focus:border-primary/50 focus:bg-black/50 text-sm sm:text-base"
               max={new Date().toISOString().split('T')[0]}
             />
             {formData.birthdate && (
@@ -159,20 +159,20 @@ export default function QuestionnaireModal({ open, onOpenChange, onComplete }: Q
       case 3:
         return (
           <div className="space-y-6 text-center">
-            <div className="w-16 h-16 mx-auto rounded-full bg-gradient-pink flex items-center justify-center">
-              <MapPin className="w-8 h-8 text-white" />
+            <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto rounded-full bg-gradient-pink flex items-center justify-center">
+              <MapPin className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-foreground">
               Onde você mora?
             </h2>
-            <p className="text-muted-foreground">
+            <p className="text-sm sm:text-base text-muted-foreground">
               Sua localização influencia sua personalidade única
             </p>
             <Input
               value={formData.city}
               onChange={(e) => updateField("city", e.target.value)}
               placeholder="Digite sua cidade"
-              className="bg-black/30 border-white/20 text-white placeholder:text-gray-400 focus:border-primary/50 focus:bg-black/50"
+              className="bg-black/30 border-white/20 text-white placeholder:text-gray-400 focus:border-primary/50 focus:bg-black/50 text-sm sm:text-base"
             />
           </div>
         );
@@ -180,17 +180,17 @@ export default function QuestionnaireModal({ open, onOpenChange, onComplete }: Q
       case 4:
         return (
           <div className="space-y-6 text-center">
-            <div className="w-16 h-16 mx-auto rounded-full bg-gradient-pink flex items-center justify-center">
-              <Star className="w-8 h-8 text-white" />
+            <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto rounded-full bg-gradient-pink flex items-center justify-center">
+              <Star className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-foreground">
               Qual o seu signo?
             </h2>
-            <p className="text-muted-foreground">
+            <p className="text-sm sm:text-base text-muted-foreground">
               As estrelas podem revelar sua personalidade
             </p>
             <RadioGroup value={formData.zodiacSign} onValueChange={(value) => updateField("zodiacSign", value)}>
-              <div className="grid grid-cols-2 gap-3 max-h-80 overflow-y-auto">
+              <div className="grid grid-cols-2 gap-3 max-h-60 sm:max-h-80 overflow-y-auto">
                 {zodiacSigns.map((sign) => (
                   <div key={sign.value}>
                     <RadioGroupItem
@@ -215,13 +215,13 @@ export default function QuestionnaireModal({ open, onOpenChange, onComplete }: Q
       case 5:
         return (
           <div className="space-y-6 text-center">
-            <div className="w-16 h-16 mx-auto rounded-full bg-gradient-pink flex items-center justify-center">
-              <Ruler className="w-8 h-8 text-white" />
+            <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto rounded-full bg-gradient-pink flex items-center justify-center">
+              <Ruler className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-foreground">
               Qual a sua altura?
             </h2>
-            <p className="text-muted-foreground">
+            <p className="text-sm sm:text-base text-muted-foreground">
               Suas características físicas únicas
             </p>
             <RadioGroup value={formData.height} onValueChange={(value) => updateField("height", value)}>
@@ -249,13 +249,13 @@ export default function QuestionnaireModal({ open, onOpenChange, onComplete }: Q
       case 6:
         return (
           <div className="space-y-6 text-center">
-            <div className="w-16 h-16 mx-auto rounded-full bg-gradient-pink flex items-center justify-center">
-              <Mail className="w-8 h-8 text-white" />
+            <div className="w-12 h-12 sm:w-16 sm:h-16 mx-auto rounded-full bg-gradient-pink flex items-center justify-center">
+              <Mail className="w-6 h-6 sm:w-8 sm:h-8 text-white" />
             </div>
-            <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-display font-bold text-foreground">
               Seu e-mail
             </h2>
-            <p className="text-muted-foreground">
+            <p className="text-sm sm:text-base text-muted-foreground">
               Para que possamos enviar seu resultado
               <br />
               <span className="text-sm text-gold">(opcional)</span>
@@ -265,7 +265,7 @@ export default function QuestionnaireModal({ open, onOpenChange, onComplete }: Q
               value={formData.email}
               onChange={(e) => updateField("email", e.target.value)}
               placeholder="Digite seu e-mail"
-              className="bg-black/30 border-white/20 text-white placeholder:text-gray-400 focus:border-primary/50 focus:bg-black/50"
+              className="bg-black/30 border-white/20 text-white placeholder:text-gray-400 focus:border-primary/50 focus:bg-black/50 text-sm sm:text-base"
             />
           </div>
         );
@@ -308,21 +308,21 @@ export default function QuestionnaireModal({ open, onOpenChange, onComplete }: Q
             <Button
               variant="outline"
               onClick={handleBack}
-              className="flex-1 bg-black/50 border-white/20 hover:bg-black/70 hover:border-white/30 text-white"
+              className="flex-1 bg-black/50 border-white/20 hover:bg-black/70 hover:border-white/30 text-white text-sm sm:text-base"
             >
-              <ArrowLeft className="w-4 h-4 mr-2" />
+              <ArrowLeft className="w-3 h-3 sm:w-4 sm:h-4 mr-2" />
               Anterior
             </Button>
           )}
           <Button
             onClick={handleNext}
             disabled={!canProceed()}
-            className="flex-1 bg-gradient-pink hover:opacity-90 transition-smooth group relative overflow-hidden"
+            className="flex-1 bg-gradient-pink hover:opacity-90 transition-smooth group relative overflow-hidden text-sm sm:text-base"
           >
             <span className="relative z-10">
               {step === totalSteps ? "Finalizar" : "Próximo"}
             </span>
-            <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-1 transition-transform" />
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
           </Button>
         </div>
