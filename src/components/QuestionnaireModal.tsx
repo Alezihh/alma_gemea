@@ -10,6 +10,7 @@ import {
   X, ArrowLeft, ArrowRight 
 } from "lucide-react";
 import { toast } from "sonner";
+import { trackLeadComplete } from "@/lib/facebookPixel";
 
 interface QuestionnaireModalProps {
   open: boolean;
@@ -83,6 +84,9 @@ export default function QuestionnaireModal({ open, onOpenChange, onComplete }: Q
 
     if (step === totalSteps) {
       // Última etapa - finalizar
+      // Track lead completion
+      trackLeadComplete(formData.email);
+      
       onComplete();
       toast.success("Análise iniciada! Agora escolha suas cartas.");
       onOpenChange(false);

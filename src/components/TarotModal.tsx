@@ -2,14 +2,17 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { TarotCard as TarotCardType } from "@/lib/tarot";
 import { Sparkles } from "lucide-react";
+import { trackPurchaseComplete } from "@/lib/facebookPixel";
+import { QuestionnaireData } from "@/hooks/useQuestionnaire";
 
 interface TarotModalProps {
   open: boolean;
   onClose: () => void;
   selectedCards: TarotCardType[];
+  questionnaireData?: QuestionnaireData;
 }
 
-const TarotModal = ({ open, onClose, selectedCards }: TarotModalProps) => {
+const TarotModal = ({ open, onClose, selectedCards, questionnaireData }: TarotModalProps) => {
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-lg w-[95vw] sm:w-full bg-transparent backdrop-blur-xl border-2 border-primary/50 shadow-[0_0_80px_rgba(236,72,153,0.4)] animate-scale-in overflow-hidden">
@@ -58,7 +61,11 @@ const TarotModal = ({ open, onClose, selectedCards }: TarotModalProps) => {
           {/* CTA Button */}
           <div className="flex justify-center pt-3 sm:pt-4 animate-fade-in-up" style={{ animationDelay: '0.8s', animationFillMode: 'backwards' }}>
             <Button 
-              onClick={() => window.open("https://pay.kirvano.com/e4c41901-7afa-47a8-a3ea-160341cc2d01", "_blank")}
+              onClick={() => {
+                // Track purchase intent with user data
+                trackPurchaseComplete(questionnaireData?.email, undefined, 19.00);
+                window.open("https://pay.kirvano.com/e4c41901-7afa-47a8-a3ea-160341cc2d01", "_blank");
+              }}
               size="lg"
               className="bg-gradient-pink hover:opacity-90 transition-smooth shadow-glow px-6 sm:px-8 lg:px-12 py-4 sm:py-5 lg:py-6 text-sm sm:text-base rounded-full group relative overflow-hidden w-full sm:w-auto max-w-xs sm:max-w-none"
             >

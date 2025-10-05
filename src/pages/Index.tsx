@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Navbar from "@/components/Navbar";
@@ -8,10 +8,19 @@ import { Heart, Shield, Eye, Clock, UserCheck, User, Wand2, Share2 } from "lucid
 import feedback1 from "@/assets/feedback1.png";
 import feedback2 from "@/assets/feedback2.png";
 import feedback3 from "@/assets/feedback3.png";
+import { trackPageView, trackViewContent, trackInitiateCheckout } from "@/lib/facebookPixel";
+import { useQuestionnaire } from "@/hooks/useQuestionnaire";
 
 const Index = () => {
   const [showQuestionnaire, setShowQuestionnaire] = useState(false);
   const [showTarotSelection, setShowTarotSelection] = useState(false);
+  const { formData } = useQuestionnaire();
+
+  // Facebook Pixel tracking
+  useEffect(() => {
+    trackPageView();
+    trackViewContent();
+  }, []);
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -19,6 +28,7 @@ const Index = () => {
   };
 
   const handleStartJourney = () => {
+    trackInitiateCheckout();
     setShowQuestionnaire(true);
   };
 
@@ -53,7 +63,7 @@ const Index = () => {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-orange-500/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: "2s" }}></div>
           
           <div className="relative z-10">
-            <TarotGrid />
+            <TarotGrid questionnaireData={formData} />
           </div>
         </section>
       ) : (

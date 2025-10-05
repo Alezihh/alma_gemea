@@ -6,8 +6,13 @@ import { shuffleCards, TAROT_CARDS, TarotCard as TarotCardType } from "@/lib/tar
 import { Shuffle, Sparkles } from "lucide-react";
 import { toast } from "sonner";
 import tarotCardBack from "@/assets/tarot-card-back.png";
+import { QuestionnaireData } from "@/hooks/useQuestionnaire";
 
-export default function TarotGrid() {
+interface TarotGridProps {
+  questionnaireData?: QuestionnaireData;
+}
+
+export default function TarotGrid({ questionnaireData }: TarotGridProps) {
   const [cards] = useState<TarotCardType[]>(() => shuffleCards(TAROT_CARDS).slice(0, 8));
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
   const [showModal, setShowModal] = useState(false);
@@ -143,7 +148,7 @@ export default function TarotGrid() {
         </p>
       </div>
 
-      <TarotModal open={showModal} onClose={() => setShowModal(false)} selectedCards={selected} />
+      <TarotModal open={showModal} onClose={() => setShowModal(false)} selectedCards={selected} questionnaireData={questionnaireData} />
     </div>
   );
 }
