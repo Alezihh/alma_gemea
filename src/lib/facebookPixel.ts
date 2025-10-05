@@ -33,14 +33,7 @@ export const trackInitiateCheckout = () => {
   }
 };
 
-export const trackPurchase = (value: number, currency: string = 'BRL') => {
-  if (typeof window !== 'undefined' && window.fbq) {
-    window.fbq('track', 'Purchase', {
-      value: value,
-      currency: currency
-    });
-  }
-};
+// Removed Purchase tracking as requested
 
 export const trackLead = () => {
   if (typeof window !== 'undefined' && window.fbq) {
@@ -109,34 +102,7 @@ export const sendConversionEvent = async (eventData: {
   }
 };
 
-// Track purchase with both Pixel and Conversion API
-export const trackPurchaseComplete = async (email?: string, phone?: string, value: number = 19.00) => {
-  // Track with Pixel
-  trackPurchase(value, 'BRL');
-
-  // Track with Conversion API
-  if (email || phone) {
-    const userData: any = {};
-    
-    if (email) {
-      userData.em = [await hashEmail(email)];
-    }
-    
-    if (phone) {
-      userData.ph = [await hashPhone(phone)];
-    }
-
-    await sendConversionEvent({
-      event_name: 'Purchase',
-      event_time: Math.floor(Date.now() / 1000),
-      user_data: userData,
-      custom_data: {
-        currency: 'BRL',
-        value: value.toString()
-      }
-    });
-  }
-};
+// Removed Purchase tracking as requested
 
 // Track lead with both Pixel and Conversion API
 export const trackLeadComplete = async (email?: string, phone?: string) => {

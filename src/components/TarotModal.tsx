@@ -2,7 +2,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { TarotCard as TarotCardType } from "@/lib/tarot";
 import { Sparkles } from "lucide-react";
-import { trackPurchaseComplete } from "@/lib/facebookPixel";
+// Removed Purchase tracking as requested
 import { QuestionnaireData } from "@/hooks/useQuestionnaire";
 
 interface TarotModalProps {
@@ -62,8 +62,7 @@ const TarotModal = ({ open, onClose, selectedCards, questionnaireData }: TarotMo
           <div className="flex justify-center pt-3 sm:pt-4 animate-fade-in-up" style={{ animationDelay: '0.8s', animationFillMode: 'backwards' }}>
             <Button 
               onClick={() => {
-                // Track purchase intent with user data
-                trackPurchaseComplete(questionnaireData?.email, undefined, 19.00);
+                // Direct link to payment (no tracking)
                 window.open("https://pay.kirvano.com/e4c41901-7afa-47a8-a3ea-160341cc2d01", "_blank");
               }}
               size="lg"
