@@ -277,12 +277,12 @@ export default function QuestionnaireModal({ open, onOpenChange, onComplete }: Q
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="max-w-lg bg-transparent backdrop-blur-xl border-2 border-primary/50 p-0 gap-0 overflow-hidden shadow-[0_0_60px_rgba(236,72,153,0.6)]">
+      <DialogContent className="max-w-lg w-[95vw] sm:w-full bg-transparent backdrop-blur-xl border-2 border-primary/50 p-0 gap-0 overflow-hidden shadow-[0_0_60px_rgba(236,72,153,0.6)]">
         {/* Background gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-purple-800/10 to-purple-900/20 pointer-events-none rounded-lg"></div>
         
         {/* Header com progresso */}
-        <div className="relative z-10 p-6 pb-4 space-y-4 animate-fade-in">
+        <div className="relative z-10 p-4 sm:p-6 pb-4 space-y-4 animate-fade-in">
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium text-gold animate-fade-in-up">Passo {step} de {totalSteps}</span>
             <Button
@@ -298,12 +298,12 @@ export default function QuestionnaireModal({ open, onOpenChange, onComplete }: Q
         </div>
 
         {/* Conteúdo da pergunta */}
-        <div className="relative z-10 px-6 pb-6 animate-fade-in">
+        <div className="relative z-10 px-4 sm:px-6 pb-6 animate-fade-in">
           {renderStep()}
         </div>
 
         {/* Botões de navegação */}
-        <div className="relative z-10 flex gap-3 p-6 pt-4 border-t border-white/10">
+        <div className="relative z-10 flex gap-3 p-4 sm:p-6 pt-4 border-t border-white/10">
           {step > 1 && (
             <Button
               variant="outline"

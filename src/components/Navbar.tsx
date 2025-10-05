@@ -8,17 +8,17 @@ const Navbar = () => {
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border/50 shadow-lg">
-      <div className="container mx-auto px-4 h-18 flex items-center justify-between">
+      <div className="container mx-auto px-3 sm:px-4 h-16 sm:h-18 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-3">
-          <div className="w-12 h-12 rounded-full bg-foreground/10 flex items-center justify-center hover:bg-foreground/20 transition-colors">
-            <Heart className="w-6 h-6 text-foreground fill-foreground" />
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-foreground/10 flex items-center justify-center hover:bg-foreground/20 transition-colors">
+            <Heart className="w-5 h-5 sm:w-6 sm:h-6 text-foreground fill-foreground" />
           </div>
           <div className="flex flex-col">
-            <span className="font-display text-xl font-bold text-foreground">
+            <span className="font-display text-lg sm:text-xl font-bold text-foreground">
               Metodo - Serena
             </span>
-            <span className="text-xs text-muted-foreground font-medium">Alma Gêmea</span>
+            <span className="text-xs text-muted-foreground font-medium hidden sm:block">Alma Gêmea</span>
           </div>
         </div>
 
@@ -48,10 +48,11 @@ const Navbar = () => {
         </div>
 
         {/* CTA Button */}
-        <div className="hidden md:flex items-center gap-4">
-          <button className="flex items-center gap-2 bg-foreground hover:bg-foreground/90 transition-smooth text-background px-4 py-2 rounded-full text-sm font-medium hover:scale-105">
-            <Users className="w-4 h-4" />
-            Começar Agora
+        <div className="hidden sm:flex items-center gap-4">
+          <button className="flex items-center gap-2 bg-foreground hover:bg-foreground/90 transition-smooth text-background px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-medium hover:scale-105">
+            <Users className="w-3 h-3 sm:w-4 sm:h-4" />
+            <span className="hidden sm:inline">Começar Agora</span>
+            <span className="sm:hidden">Começar</span>
           </button>
         </div>
 

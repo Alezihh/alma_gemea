@@ -59,23 +59,23 @@ const Index = () => {
       ) : (
         <>
           {/* Hero Section */}
-          <section className="min-h-screen flex items-center justify-center px-4 pt-24 pb-12">
-            <div className="container mx-auto max-w-5xl text-center space-y-8 animate-fade-in-up">
-              <h1 className="text-5xl md:text-7xl font-display font-bold leading-tight">
+          <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-8 sm:pb-12">
+            <div className="container mx-auto max-w-5xl text-center space-y-6 sm:space-y-8 animate-fade-in-up">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold leading-tight px-2">
                 Descubra Sua{" "}
                 <span className="bg-gradient-to-r from-rose via-secondary to-gold bg-clip-text text-transparent">
                   Alma Gêmea
                 </span>
               </h1>
 
-              <p className="text-lg md:text-xl text-gold max-w-3xl mx-auto leading-relaxed">
+              <p className="text-base sm:text-lg md:text-xl text-gold max-w-3xl mx-auto leading-relaxed px-4">
                 Graças ao Método Serena, revelamos o perfil da pessoa que não apenas combina com você, 
                 mas desperta o amor e a conexão que sua alma sempre buscou.
               </p>
 
               {/* Video do YouTube */}
-              <div className="relative max-w-3xl mx-auto my-8">
-                <div className="aspect-video rounded-2xl overflow-hidden border-2 border-primary/30 shadow-glow">
+              <div className="relative max-w-3xl mx-auto my-6 sm:my-8 px-4">
+                <div className="aspect-video rounded-xl sm:rounded-2xl overflow-hidden border-2 border-primary/30 shadow-glow">
                   <iframe
                     className="w-full h-full"
                     src="https://www.youtube.com/embed/UJmFGklL7N4?autoplay=1&mute=1&loop=1&playlist=UJmFGklL7N4&controls=1&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&start=0&end=0&hd=1&vq=hd1080"
@@ -92,22 +92,22 @@ const Index = () => {
               <Button
                 onClick={handleStartJourney}
                 size="lg"
-                className="text-lg px-10 py-7 bg-foreground hover:bg-foreground/90 transition-smooth hover:scale-105 rounded-full text-background"
+                className="text-base sm:text-lg px-6 sm:px-8 lg:px-10 py-4 sm:py-5 lg:py-7 bg-foreground hover:bg-foreground/90 transition-smooth hover:scale-105 rounded-full text-background w-full sm:w-auto max-w-xs sm:max-w-none"
               >
-                <Heart className="w-5 h-5 mr-2 fill-background" />
-                Começar Minha Jornada
+                <Heart className="w-4 h-4 sm:w-5 sm:h-5 mr-2 fill-background" />
+                <span className="text-sm sm:text-base">Começar Minha Jornada</span>
               </Button>
             </div>
           </section>
 
           {/* Testimonials Section */}
-          <section className="py-20 px-4">
+          <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6">
             <div className="container mx-auto max-w-6xl">
-              <h2 className="text-3xl md:text-4xl font-display text-center mb-12 text-gold animate-fade-in-up">
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-display text-center mb-8 sm:mb-12 text-gold animate-fade-in-up px-4">
                 Pessoas que encontraram suas almas gêmeas através da nossa análise mística
               </h2>
 
-              <div className="grid md:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
                 {[
                   {
                     names: "Fernanda & Daniel",
@@ -169,15 +169,15 @@ const Index = () => {
                 ))}
               </div>
 
-              <div className="text-center mt-12">
-                <p className="text-gold text-xl font-semibold">Você também pode encontrar sua alma gêmea!</p>
+              <div className="text-center mt-8 sm:mt-12 px-4">
+                <p className="text-gold text-lg sm:text-xl font-semibold mb-4 sm:mb-6">Você também pode encontrar sua alma gêmea!</p>
                 <Button
                   onClick={() => scrollToSection("como-funciona")}
                   size="lg"
-                  className="mt-6 text-lg px-10 py-6 bg-foreground hover:bg-foreground/90 transition-smooth rounded-full text-background"
+                  className="text-base sm:text-lg px-6 sm:px-8 lg:px-10 py-4 sm:py-5 lg:py-6 bg-foreground hover:bg-foreground/90 transition-smooth rounded-full text-background w-full sm:w-auto max-w-xs sm:max-w-none"
                 >
-                  <Heart className="w-5 h-5 mr-2 fill-background" />
-                  Descobrir Minha Alma Gêmea
+                  <Heart className="w-4 h-4 sm:w-5 sm:h-5 mr-2 fill-background" />
+                  <span className="text-sm sm:text-base">Descobrir Minha Alma Gêmea</span>
                 </Button>
               </div>
             </div>
