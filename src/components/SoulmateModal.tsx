@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Sparkles, Heart, Wand2 } from 'lucide-react';
 import ChatOverlay from './ChatOverlay';
+import { trackInitiateCheckout } from '@/lib/facebookPixel';
 
 interface SoulmateModalProps {
   open: boolean;
@@ -102,6 +103,7 @@ const SoulmateModal = ({ open, onClose, onComplete }: SoulmateModalProps) => {
   };
 
   const handleChatComplete = () => {
+    trackInitiateCheckout();
     setShowChatOverlay(false);
     onComplete();
   };

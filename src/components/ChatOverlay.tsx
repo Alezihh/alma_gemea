@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { trackInitiateCheckout } from '@/lib/facebookPixel';
 
 // Declaração global para TypeScript
 declare global {
@@ -150,7 +151,7 @@ const ChatOverlay = ({ isOpen, onClose, onComplete }: ChatOverlayProps) => {
               }}
             >
               <button
-                onClick={onComplete}
+                onClick={() => { trackInitiateCheckout(); onComplete(); }}
                 className="bg-gradient-to-r from-pink-500 via-fuchsia-500 to-violet-500 hover:from-pink-600 hover:via-fuchsia-600 hover:to-violet-600 text-white font-bold py-4 px-8 rounded-2xl transition-all duration-300 shadow-[0_6px_18px_rgba(0,0,0,0.25)] hover:shadow-[0_8px_25px_rgba(0,0,0,0.35)] transform hover:scale-105"
               >
                 <div className="flex items-center space-x-2">

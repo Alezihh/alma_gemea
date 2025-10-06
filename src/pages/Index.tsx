@@ -7,7 +7,7 @@ import { Heart, Shield, Eye, Clock, UserCheck, User, Wand2, Share2 } from "lucid
 import feedback1 from "@/assets/feedback1.png";
 import feedback2 from "@/assets/feedback2.png";
 import feedback3 from "@/assets/feedback3.png";
-import { trackPageView, trackViewContent, trackInitiateCheckout } from "@/lib/facebookPixel";
+import { trackPageView, trackViewContent, trackInitiateCheckout, trackAddToCart } from "@/lib/facebookPixel";
 import { useQuestionnaire } from "@/hooks/useQuestionnaire";
 
 const Index = () => {
@@ -27,7 +27,8 @@ const Index = () => {
   };
 
   const handleStartJourney = () => {
-    trackInitiateCheckout();
+    // Adicionar ao carrinho quando iniciar a jornada
+    trackAddToCart();
     setShowQuestionnaire(true);
   };
 
