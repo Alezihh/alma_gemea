@@ -7,10 +7,12 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { 
   User, Calendar, MapPin, Star, Ruler, Mail, 
-  X, ArrowLeft, ArrowRight 
+  X, ArrowLeft, ArrowRight, Loader2
 } from "lucide-react";
 import { toast } from "sonner";
 import { trackLeadComplete } from "@/lib/facebookPixel";
+import { useQuestionnaire } from "@/hooks/useQuestionnaire";
+import SupabaseSetup from "./SupabaseSetup";
 
 interface QuestionnaireModalProps {
   open: boolean;
@@ -41,21 +43,10 @@ const heightOptions = [
 
 export default function QuestionnaireModal({ open, onOpenChange, onComplete }: QuestionnaireModalProps) {
   const [step, setStep] = useState(1);
-  const [formData, setFormData] = useState({
-    name: "",
-    birthdate: "",
-    city: "",
-    zodiacSign: "",
-    height: "",
-    email: "",
-  });
+  const { formData, updateField, saveData, isLoading, error, showSetup, setShowSetup } = useQuestionnaire();
 
   const totalSteps = 6;
   const progress = (step / totalSteps) * 100;
-
-  const updateField = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
-  };
 
   const canProceed = () => {
     switch (step) {
@@ -76,29 +67,28 @@ export default function QuestionnaireModal({ open, onOpenChange, onComplete }: Q
     }
   };
 
-  const handleNext = () => {
+  const handleNext = async () => {
     if (!canProceed()) {
       toast.error("Por favor, preencha este campo para continuar");
       return;
     }
 
     if (step === totalSteps) {
-      // Última etapa - finalizar
-      // Track lead completion
-      trackLeadComplete(formData.email);
-      
-      onComplete();
-      toast.success("Análise iniciada! Agora escolha suas cartas.");
-      onOpenChange(false);
-      setStep(1);
-      setFormData({
-        name: "",
-        birthdate: "",
-        city: "",
-        zodiacSign: "",
-        height: "",
-        email: "",
-      });
+      // Última etapa - salvar dados e finalizar
+      try {
+        await saveData();
+        
+        // Track lead completion
+        trackLeadComplete(formData.email);
+        
+        onComplete();
+        toast.success("Dados salvos! Análise iniciada! Agora escolha suas cartas.");
+        onOpenChange(false);
+        setStep(1);
+      } catch (err) {
+        console.error('Error saving data:', err);
+        toast.error("Erro ao salvar dados. Tente novamente.");
+      }
     } else {
       setStep(step + 1);
     }
@@ -279,6 +269,10 @@ export default function QuestionnaireModal({ open, onOpenChange, onComplete }: Q
     }
   };
 
+  if (showSetup) {
+    return <SupabaseSetup />;
+  }
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-lg w-[95vw] sm:w-full bg-transparent backdrop-blur-xl border-2 border-primary/50 p-0 gap-0 overflow-hidden shadow-[0_0_60px_rgba(236,72,153,0.6)]">
@@ -320,13 +314,22 @@ export default function QuestionnaireModal({ open, onOpenChange, onComplete }: Q
           )}
           <Button
             onClick={handleNext}
-            disabled={!canProceed()}
+            disabled={!canProceed() || isLoading}
             className="flex-1 bg-gradient-pink hover:opacity-90 transition-smooth group relative overflow-hidden text-sm sm:text-base"
           >
-            <span className="relative z-10">
-              {step === totalSteps ? "Finalizar" : "Próximo"}
-            </span>
-            <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+            {isLoading ? (
+              <>
+                <Loader2 className="w-3 h-3 sm:w-4 sm:h-4 mr-2 animate-spin" />
+                <span className="relative z-10">Salvando...</span>
+              </>
+            ) : (
+              <>
+                <span className="relative z-10">
+                  {step === totalSteps ? "Finalizar" : "Próximo"}
+                </span>
+                <ArrowRight className="w-3 h-3 sm:w-4 sm:h-4 ml-2 group-hover:translate-x-1 transition-transform" />
+              </>
+            )}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
           </Button>
         </div>

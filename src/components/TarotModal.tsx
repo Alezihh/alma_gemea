@@ -4,6 +4,8 @@ import { TarotCard as TarotCardType } from "@/lib/tarot";
 import { Sparkles } from "lucide-react";
 // Removed Purchase tracking as requested
 import { QuestionnaireData } from "@/hooks/useQuestionnaire";
+import TrustMessages from "./TrustMessages";
+import { useState } from "react";
 
 interface TarotModalProps {
   open: boolean;
@@ -13,6 +15,21 @@ interface TarotModalProps {
 }
 
 const TarotModal = ({ open, onClose, selectedCards, questionnaireData }: TarotModalProps) => {
+  const [showTrustMessages, setShowTrustMessages] = useState(false);
+
+  const handlePaymentClick = () => {
+    setShowTrustMessages(true);
+  };
+
+  const handleTrustComplete = () => {
+    // Direct link to payment (no tracking)
+    window.open("https://pay.kirvano.com/e4c41901-7afa-47a8-a3ea-160341cc2d01", "_blank");
+  };
+
+  if (showTrustMessages) {
+    return <TrustMessages onComplete={handleTrustComplete} />;
+  }
+
   return (
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-lg w-[95vw] sm:w-full bg-transparent backdrop-blur-xl border-2 border-primary/50 shadow-[0_0_80px_rgba(236,72,153,0.4)] animate-scale-in overflow-hidden">
@@ -31,10 +48,19 @@ const TarotModal = ({ open, onClose, selectedCards, questionnaireData }: TarotMo
             </div>
           </div>
 
-          {/* Title / Blurred image placeholder */}
+          {/* Title / Selected cards image */}
           <div className="text-center space-y-4 animate-fade-in-up" style={{ animationDelay: '0.2s', animationFillMode: 'backwards' }}>
-            <div className="h-12 sm:h-14 lg:h-16 rounded-lg bg-black/20 backdrop-blur-md border border-gold/30 flex items-center justify-center">
-              <p className="text-xs sm:text-sm text-gold font-medium">✨ Análise Mística em Andamento ✨</p>
+            <p className="text-sm sm:text-base text-gold font-medium">
+              O destino me revelou essas 3 cartas
+            </p>
+            <div className="rounded-lg overflow-hidden border border-gold/30 shadow-lg bg-black/20">
+              <img 
+                src="https://bot-minio.ggiegp.easypanel.host/typebot/public/workspaces/cmg2u7y9x004itn1je5cwv7es/typebots/cmg2x6ka4004stn1j8slwwb9w/blocks/v2o98guxbhxl6km5i7lqns2f?v=1759031348356" 
+                alt="Cartas selecionadas" 
+                className="w-full h-auto max-h-32 sm:max-h-40 object-contain"
+                onLoad={() => console.log('Imagem carregada com sucesso')}
+                onError={() => console.log('Erro ao carregar imagem')}
+              />
             </div>
           </div>
 
@@ -61,10 +87,7 @@ const TarotModal = ({ open, onClose, selectedCards, questionnaireData }: TarotMo
           {/* CTA Button */}
           <div className="flex justify-center pt-3 sm:pt-4 animate-fade-in-up" style={{ animationDelay: '0.8s', animationFillMode: 'backwards' }}>
             <Button 
-              onClick={() => {
-                // Direct link to payment (no tracking)
-                window.open("https://pay.kirvano.com/e4c41901-7afa-47a8-a3ea-160341cc2d01", "_blank");
-              }}
+              onClick={handlePaymentClick}
               size="lg"
               className="bg-gradient-pink hover:opacity-90 transition-smooth shadow-glow px-6 sm:px-8 lg:px-12 py-4 sm:py-5 lg:py-6 text-sm sm:text-base rounded-full group relative overflow-hidden w-full sm:w-auto max-w-xs sm:max-w-none"
             >
