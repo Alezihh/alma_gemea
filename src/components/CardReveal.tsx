@@ -63,7 +63,7 @@ const CardReveal = ({ selectedCards, onComplete }: CardRevealProps) => {
 
   return (
     <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4">
-      <div className="w-full max-w-5xl">
+      <div className="w-full max-w-5xl mx-4 sm:mx-0">
         {/* Header */}
         <div className="text-center mb-4 sm:mb-6 md:mb-8">
           <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gold mb-2 sm:mb-4 px-4">
@@ -74,10 +74,10 @@ const CardReveal = ({ selectedCards, onComplete }: CardRevealProps) => {
           </p>
         </div>
 
-        {/* Cards Grid */}
+        {/* Cards Grid - Mobile: 1 carta por vez, Desktop: grid normal */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8">
           {selectedCards.map((card, index) => (
-            <div key={card.id} className="relative">
+            <div key={card.id} className={`relative ${index > currentCardIndex ? 'hidden sm:block' : ''}`}>
               {/* Card Image Container */}
               <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[28rem] mb-4 sm:mb-6">
                 {/* Card Container */}
@@ -145,17 +145,19 @@ const CardReveal = ({ selectedCards, onComplete }: CardRevealProps) => {
               onClick={handleRevealNext}
               disabled={isRevealing}
               size="lg"
-              className="bg-gradient-pink hover:opacity-90 transition-smooth shadow-glow px-4 sm:px-6 md:px-8 py-3 sm:py-4 text-sm sm:text-base md:text-lg rounded-full w-full sm:w-auto max-w-xs"
+              className="bg-gradient-pink hover:opacity-90 transition-smooth shadow-glow px-6 sm:px-8 py-4 sm:py-5 text-base sm:text-lg rounded-full w-full sm:w-auto max-w-sm"
             >
               {isRevealing ? (
                 <>
-                  <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2 animate-spin" />
-                  <span className="text-xs sm:text-sm">Revelando...</span>
+                  <Sparkles className="w-5 h-5 mr-2 animate-spin" />
+                  <span className="text-sm sm:text-base">Revelando...</span>
                 </>
               ) : (
                 <>
-                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-                  <span className="text-xs sm:text-sm">Revelar Próxima Carta</span>
+                  <ArrowRight className="w-5 h-5 mr-2" />
+                  <span className="text-sm sm:text-base">
+                    {currentCardIndex === 0 ? "Revelar Primeira Carta" : "Revelar Próxima Carta"}
+                  </span>
                 </>
               )}
             </Button>
@@ -163,10 +165,10 @@ const CardReveal = ({ selectedCards, onComplete }: CardRevealProps) => {
             <Button
               onClick={onComplete}
               size="lg"
-              className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 transition-smooth shadow-glow px-4 sm:px-6 md:px-8 py-3 sm:py-4 text-sm sm:text-base md:text-lg rounded-full w-full sm:w-auto max-w-xs"
+              className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 transition-smooth shadow-glow px-6 sm:px-8 py-4 sm:py-5 text-base sm:text-lg rounded-full w-full sm:w-auto max-w-sm"
             >
-              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
-              <span className="text-xs sm:text-sm">Ver Minha Alma Gêmea</span>
+              <Sparkles className="w-5 h-5 mr-2" />
+              <span className="text-sm sm:text-base">Ver Minha Alma Gêmea</span>
             </Button>
           )}
         </div>
