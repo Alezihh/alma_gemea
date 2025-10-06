@@ -11,7 +11,6 @@ interface CardRevealProps {
 
 const CardReveal = ({ selectedCards, onComplete }: CardRevealProps) => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
-  const [revealedCards, setRevealedCards] = useState<boolean[]>(new Array(selectedCards.length).fill(false));
   const [isRevealing, setIsRevealing] = useState(false);
   
   // Gerar valores apenas uma vez e mantê-los fixos
@@ -34,35 +33,32 @@ const CardReveal = ({ selectedCards, onComplete }: CardRevealProps) => {
   };
 
   const handleRevealNext = () => {
-    if (currentCardIndex < selectedCards.length) {
+    if (currentCardIndex < selectedCards.length - 1) {
       setIsRevealing(true);
       
       // Simulate card flip animation
       setTimeout(() => {
-        setRevealedCards(prev => {
-          const newRevealed = [...prev];
-          newRevealed[currentCardIndex] = true;
-          return newRevealed;
-        });
         setCurrentCardIndex(prev => prev + 1);
         setIsRevealing(false);
       }, 800);
     }
   };
 
-  const allCardsRevealed = currentCardIndex >= selectedCards.length;
+  const allCardsRevealed = currentCardIndex >= selectedCards.length - 1;
 
   useEffect(() => {
     // Auto-reveal first card after component mounts
     const timer = setTimeout(() => {
-      handleRevealNext();
+      setIsRevealing(false);
     }, 1000);
     
     return () => clearTimeout(timer);
   }, []);
 
+  const currentCard = selectedCards[currentCardIndex];
+
   return (
-    <div className="fixed inset-0 bg-black/95 backdrop-blur-sm z-50 flex items-center justify-center p-2">
+    <div className="fixed inset-0 bg-black/95 backdrop-blur-sm z-50 flex items-center justify-center p-4">
       <div className="w-full max-w-md mx-auto">
         {/* Header */}
         <div className="text-center mb-6">
@@ -70,67 +66,63 @@ const CardReveal = ({ selectedCards, onComplete }: CardRevealProps) => {
             ✨ Suas Cartas Reveladas ✨
           </h2>
           <p className="text-sm text-white/80">
-            {currentCardIndex} de {selectedCards.length} cartas reveladas
+            {currentCardIndex + 1} de {selectedCards.length} cartas reveladas
           </p>
         </div>
 
         {/* Card Container - Mobile: 1 carta por vez */}
         <div className="mb-8">
-          {selectedCards.map((card, index) => (
-            <div key={card.id} className={`${index !== currentCardIndex ? 'hidden' : ''}`}>
-              {/* Card Image - Full Size */}
-              <div className="relative w-full h-80 mb-4">
-                <div 
-                  className={`relative w-full h-full transition-all duration-1000 transform-style-preserve-3d ${
-                    revealedCards[index] ? 'rotate-y-180' : 'rotate-y-0'
-                  } ${isRevealing && index === currentCardIndex ? 'card-flip' : ''}`}
-                >
-                  {/* Card Back */}
-                  <div className="absolute inset-0 w-full h-full rounded-xl overflow-hidden border-4 border-gold/40 shadow-2xl backface-hidden rotate-y-0">
-                    <img 
-                      src={tarotCardBack} 
-                      alt="Tarot Card Back" 
-                      className="w-full h-full object-cover"
-                    />
-                    {!revealedCards[index] && (
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-center justify-center">
-                        <Sparkles className="w-8 h-8 text-gold animate-spin" />
-                      </div>
-                    )}
+          {/* Card Image - Full Size */}
+          <div className="relative w-full h-80 mb-4">
+            <div 
+              className={`relative w-full h-full transition-all duration-1000 transform-style-preserve-3d ${
+                !isRevealing ? 'rotate-y-180' : 'rotate-y-0'
+              }`}
+            >
+              {/* Card Back */}
+              <div className="absolute inset-0 w-full h-full rounded-xl overflow-hidden border-4 border-gold/40 shadow-2xl backface-hidden rotate-y-0">
+                <img 
+                  src={tarotCardBack} 
+                  alt="Tarot Card Back" 
+                  className="w-full h-full object-cover"
+                />
+                {isRevealing && (
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-center justify-center">
+                    <Sparkles className="w-8 h-8 text-gold animate-spin" />
                   </div>
-
-                  {/* Card Front - Full Image */}
-                  <div className="absolute inset-0 w-full h-full rounded-xl overflow-hidden border-4 border-primary shadow-2xl backface-hidden rotate-y-180">
-                    <img 
-                      src={card.image} 
-                      alt={card.name}
-                      className="w-full h-full object-contain bg-black/20"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'%3E%3Crect width='300' height='400' fill='%23633c88'/%3E%3Ctext x='150' y='200' text-anchor='middle' fill='%23ec4899' font-family='serif' font-size='24'%3E" + card.name + "%3C/text%3E%3C/svg%3E";
-                      }}
-                    />
-                    {revealedCards[index] && (
-                      <div className="absolute top-2 right-2">
-                        <Sparkles className="w-6 h-6 text-gold animate-pulse" />
-                      </div>
-                    )}
-                  </div>
-                </div>
+                )}
               </div>
 
-              {/* Card Content - Only show when revealed */}
-              {revealedCards[index] && (
-                <div className="bg-black/40 rounded-xl p-4 border border-gold/20 animate-fade-in">
-                  <h3 className="text-lg font-bold text-white mb-3 text-center">{card.name}</h3>
-                  <div 
-                    className="text-sm text-white/90 leading-relaxed text-center"
-                    dangerouslySetInnerHTML={{ __html: processCardContent(card.content) }}
-                  />
-                </div>
-              )}
+              {/* Card Front - Full Image */}
+              <div className="absolute inset-0 w-full h-full rounded-xl overflow-hidden border-4 border-primary shadow-2xl backface-hidden rotate-y-180">
+                <img 
+                  src={currentCard.image} 
+                  alt={currentCard.name}
+                  className="w-full h-full object-contain bg-black/20"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'%3E%3Crect width='300' height='400' fill='%23633c88'/%3E%3Ctext x='150' y='200' text-anchor='middle' fill='%23ec4899' font-family='serif' font-size='24'%3E" + currentCard.name + "%3C/text%3E%3C/svg%3E";
+                  }}
+                />
+                {!isRevealing && (
+                  <div className="absolute top-2 right-2">
+                    <Sparkles className="w-6 h-6 text-gold animate-pulse" />
+                  </div>
+                )}
+              </div>
             </div>
-          ))}
+          </div>
+
+          {/* Card Content - Only show when revealed */}
+          {!isRevealing && (
+            <div className="bg-black/40 rounded-xl p-4 border border-gold/20 animate-fade-in">
+              <h3 className="text-lg font-bold text-white mb-3 text-center">{currentCard.name}</h3>
+              <div 
+                className="text-sm text-white/90 leading-relaxed text-center"
+                dangerouslySetInnerHTML={{ __html: processCardContent(currentCard.content) }}
+              />
+            </div>
+          )}
         </div>
 
         {/* Action Buttons */}
