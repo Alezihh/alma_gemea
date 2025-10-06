@@ -12,6 +12,7 @@ interface CardRevealProps {
 const CardReveal = ({ selectedCards, onComplete }: CardRevealProps) => {
   const [currentCardIndex, setCurrentCardIndex] = useState(0);
   const [isRevealing, setIsRevealing] = useState(false);
+  const [isCardRevealed, setIsCardRevealed] = useState(false);
   
   // Gerar valores apenas uma vez e mantê-los fixos
   const [randomValues] = useState<{letter: string, skinColor: string, hairColor: string}>(() => generateRandomValues());
@@ -33,27 +34,23 @@ const CardReveal = ({ selectedCards, onComplete }: CardRevealProps) => {
   };
 
   const handleRevealNext = () => {
-    if (currentCardIndex < selectedCards.length - 1) {
+    if (!isCardRevealed) {
+      // Primeiro: revelar a carta atual
       setIsRevealing(true);
-      
-      // Simulate card flip animation
       setTimeout(() => {
-        setCurrentCardIndex(prev => prev + 1);
+        setIsCardRevealed(true);
         setIsRevealing(false);
       }, 800);
+    } else {
+      // Segundo: passar para a próxima carta
+      if (currentCardIndex < selectedCards.length - 1) {
+        setCurrentCardIndex(prev => prev + 1);
+        setIsCardRevealed(false);
+      }
     }
   };
 
   const allCardsRevealed = currentCardIndex >= selectedCards.length - 1;
-
-  useEffect(() => {
-    // Auto-reveal first card after component mounts
-    const timer = setTimeout(() => {
-      setIsRevealing(false);
-    }, 1000);
-    
-    return () => clearTimeout(timer);
-  }, []);
 
   const currentCard = selectedCards[currentCardIndex];
 
@@ -76,7 +73,7 @@ const CardReveal = ({ selectedCards, onComplete }: CardRevealProps) => {
           <div className="relative w-full h-80 mb-4">
             <div 
               className={`relative w-full h-full transition-all duration-1000 transform-style-preserve-3d ${
-                !isRevealing ? 'rotate-y-180' : 'rotate-y-0'
+                isCardRevealed ? 'rotate-y-180' : 'rotate-y-0'
               }`}
             >
               {/* Card Back */}
@@ -104,7 +101,7 @@ const CardReveal = ({ selectedCards, onComplete }: CardRevealProps) => {
                     target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'%3E%3Crect width='300' height='400' fill='%23633c88'/%3E%3Ctext x='150' y='200' text-anchor='middle' fill='%23ec4899' font-family='serif' font-size='24'%3E" + currentCard.name + "%3C/text%3E%3C/svg%3E";
                   }}
                 />
-                {!isRevealing && (
+                {isCardRevealed && (
                   <div className="absolute top-2 right-2">
                     <Sparkles className="w-6 h-6 text-gold animate-pulse" />
                   </div>
@@ -114,7 +111,7 @@ const CardReveal = ({ selectedCards, onComplete }: CardRevealProps) => {
           </div>
 
           {/* Card Content - Only show when revealed */}
-          {!isRevealing && (
+          {isCardRevealed && (
             <div className="bg-black/40 rounded-xl p-4 border border-gold/20 animate-fade-in">
               <h3 className="text-lg font-bold text-white mb-3 text-center">{currentCard.name}</h3>
               <div 
@@ -143,7 +140,7 @@ const CardReveal = ({ selectedCards, onComplete }: CardRevealProps) => {
                 <>
                   <ArrowRight className="w-5 h-5 mr-2" />
                   <span>
-                    {currentCardIndex === 0 ? "Revelar Primeira Carta" : "Revelar Próxima Carta"}
+                    {!isCardRevealed ? "Revelar Carta" : "Próxima Carta"}
                   </span>
                 </>
               )}
