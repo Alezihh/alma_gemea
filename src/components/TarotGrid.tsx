@@ -56,16 +56,16 @@ export default function TarotGrid({ questionnaireData }: TarotGridProps) {
   const selected = selectedCards.map((index) => cards[index]);
 
   return (
-    <div className="container mx-auto max-w-5xl px-4 py-12 w-full">
-      <div className="text-center space-y-6 mb-12 animate-fade-in-up">
-        <div className="inline-block px-6 py-2 rounded-full bg-gradient-pink/20 border border-primary/30 mb-4">
-          <p className="text-gold font-medium">Deixe sua intuição guiar suas escolhas</p>
+    <div className="container mx-auto max-w-5xl px-3 sm:px-4 py-8 sm:py-10 md:py-12 w-full">
+      <div className="text-center space-y-4 sm:space-y-6 mb-8 sm:mb-10 md:mb-12 animate-fade-in-up">
+        <div className="inline-block px-4 sm:px-6 py-2 rounded-full bg-gradient-pink/20 border border-primary/30 mb-3 sm:mb-4">
+          <p className="text-gold font-medium text-sm sm:text-base">Deixe sua intuição guiar suas escolhas</p>
         </div>
 
-        <div className="flex items-center justify-center gap-2 mb-8">
-          <div className="px-6 py-3 rounded-full bg-primary/20 border-2 border-primary">
-            <span className="text-lg font-semibold text-primary">
-              <Sparkles className="w-5 h-5 inline mr-2" />
+        <div className="flex items-center justify-center gap-2 mb-6 sm:mb-8">
+          <div className="px-4 sm:px-6 py-2 sm:py-3 rounded-full bg-primary/20 border-2 border-primary">
+            <span className="text-sm sm:text-base md:text-lg font-semibold text-primary">
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 inline mr-2" />
               {selectedCards.length} de 3 selecionadas
             </span>
           </div>
@@ -73,15 +73,15 @@ export default function TarotGrid({ questionnaireData }: TarotGridProps) {
       </div>
 
       {/* Cards Grid - 4 em cima, 4 embaixo */}
-      <div className="space-y-4 sm:space-y-6 mb-8 sm:mb-12">
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-6 justify-items-center">
+      <div className="space-y-3 sm:space-y-4 md:space-y-6 mb-6 sm:mb-8 md:mb-12">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 md:gap-4 lg:gap-6 justify-items-center">
           {cards.slice(0, 4).map((card, index) => (
             <div key={card.id} className="relative">
               <button
                 onClick={() => handleCardToggle(index)}
                 aria-pressed={selectedCards.includes(index)}
                 className={`
-                  w-28 h-40 sm:w-32 sm:h-44 md:w-36 md:h-52 rounded-lg overflow-hidden
+                  w-24 h-32 sm:w-28 sm:h-40 md:w-32 md:h-44 lg:w-36 lg:h-52 rounded-lg overflow-hidden
                   border-4 transition-all duration-300 cursor-pointer
                   hover:scale-110 hover:-translate-y-3 hover:rotate-2
                   focus:outline-none focus:ring-4 focus:ring-primary/50
@@ -107,14 +107,14 @@ export default function TarotGrid({ questionnaireData }: TarotGridProps) {
             </div>
           ))}
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-6 justify-items-center">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 md:gap-4 lg:gap-6 justify-items-center">
           {cards.slice(4, 8).map((card, index) => (
             <div key={card.id} className="relative">
               <button
                 onClick={() => handleCardToggle(index + 4)}
                 aria-pressed={selectedCards.includes(index + 4)}
                 className={`
-                  w-28 h-40 sm:w-32 sm:h-44 md:w-36 md:h-52 rounded-lg overflow-hidden
+                  w-24 h-32 sm:w-28 sm:h-40 md:w-32 md:h-44 lg:w-36 lg:h-52 rounded-lg overflow-hidden
                   border-4 transition-all duration-300 cursor-pointer
                   hover:scale-110 hover:-translate-y-3 hover:rotate-2
                   focus:outline-none focus:ring-4 focus:ring-primary/50
@@ -143,20 +143,20 @@ export default function TarotGrid({ questionnaireData }: TarotGridProps) {
       </div>
 
       {/* Action Buttons */}
-      <div className="flex flex-col gap-4 items-center">
+      <div className="flex flex-col gap-3 sm:gap-4 items-center">
         <Button
           onClick={handleReveal}
           disabled={selectedCards.length !== 3}
           size="lg"
-          className="w-full max-w-sm sm:max-w-md bg-gradient-pink hover:opacity-90 transition-smooth shadow-glow disabled:opacity-30 disabled:cursor-not-allowed py-4 sm:py-6 md:py-7 text-sm sm:text-base md:text-lg rounded-full"
+          className="w-full max-w-xs sm:max-w-sm md:max-w-md bg-gradient-pink hover:opacity-90 transition-smooth shadow-glow disabled:opacity-30 disabled:cursor-not-allowed py-3 sm:py-4 md:py-5 lg:py-6 text-sm sm:text-base md:text-lg rounded-full"
         >
-          <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+          <Sparkles className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 mr-2" />
           <span className="text-xs sm:text-sm md:text-base">
             {selectedCards.length === 3 ? "Revelar Minhas Cartas" : "Selecione 3 cartas"}
           </span>
         </Button>
 
-        <p className="text-xs sm:text-sm text-gold text-center px-4">
+        <p className="text-xs sm:text-sm text-gold text-center px-2 sm:px-4">
           {selectedCards.length === 3 
             ? "Perfeito! Clique para revelar suas cartas" 
             : "Escolha 3 cartas para continuar"}

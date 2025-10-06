@@ -92,17 +92,17 @@ const SoulmateModal = ({ open, onClose, onComplete }: SoulmateModalProps) => {
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
-      <DialogContent className="max-w-4xl w-[95vw] sm:w-full bg-transparent backdrop-blur-xl border-2 border-primary/50 shadow-[0_0_80px_rgba(236,72,153,0.4)] animate-scale-in overflow-hidden mx-4 sm:mx-0">
+      <DialogContent className="max-w-4xl w-[95vw] sm:w-full bg-transparent backdrop-blur-xl border-2 border-primary/50 shadow-[0_0_80px_rgba(236,72,153,0.4)] animate-scale-in overflow-hidden mx-2 sm:mx-4 md:mx-0">
         {/* Background effects */}
         <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 via-purple-800/10 to-purple-900/20 pointer-events-none"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(236,72,153,0.15),transparent_50%)] pointer-events-none"></div>
         
-        <div className="relative z-10 py-4 px-4 sm:py-8 sm:px-6">
+        <div className="relative z-10 py-3 px-3 sm:py-4 sm:px-4 md:py-8 md:px-6">
           {/* Loading Animation */}
           {!isComplete && (
-            <div className="space-y-6">
+            <div className="space-y-4 sm:space-y-6">
               {/* Progress Bar */}
-              <div className="w-full bg-black/20 rounded-full h-3 overflow-hidden">
+              <div className="w-full bg-black/20 rounded-full h-2 sm:h-3 overflow-hidden">
                 <div 
                   className="h-full bg-gradient-to-r from-pink-500 to-purple-500 rounded-full transition-all duration-1000 ease-out"
                   style={{ width: `${((loadingStep + 1) / loadingSteps.length) * 100}%` }}
@@ -111,21 +111,21 @@ const SoulmateModal = ({ open, onClose, onComplete }: SoulmateModalProps) => {
 
               {/* Loading Text */}
               <div className="text-center">
-                <p className="text-lg text-gold font-medium animate-pulse">
+                <p className="text-sm sm:text-base md:text-lg text-gold font-medium animate-pulse">
                   {loadingSteps[loadingStep]}
                 </p>
               </div>
 
               {/* Animated Icons */}
-              <div className="flex justify-center space-x-4">
-                <div className="w-12 h-12 rounded-full bg-pink-500/20 flex items-center justify-center animate-bounce">
-                  <Heart className="w-6 h-6 text-pink-500" />
+              <div className="flex justify-center space-x-2 sm:space-x-4">
+                <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-pink-500/20 flex items-center justify-center animate-bounce">
+                  <Heart className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-pink-500" />
                 </div>
-                <div className="w-12 h-12 rounded-full bg-purple-500/20 flex items-center justify-center animate-bounce" style={{ animationDelay: '0.2s' }}>
-                  <Sparkles className="w-6 h-6 text-purple-500" />
+                <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-purple-500/20 flex items-center justify-center animate-bounce" style={{ animationDelay: '0.2s' }}>
+                  <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-purple-500" />
                 </div>
-                <div className="w-12 h-12 rounded-full bg-amber-500/20 flex items-center justify-center animate-bounce" style={{ animationDelay: '0.4s' }}>
-                  <Wand2 className="w-6 h-6 text-amber-500" />
+                <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-amber-500/20 flex items-center justify-center animate-bounce" style={{ animationDelay: '0.4s' }}>
+                  <Wand2 className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-amber-500" />
                 </div>
               </div>
             </div>
@@ -133,33 +133,33 @@ const SoulmateModal = ({ open, onClose, onComplete }: SoulmateModalProps) => {
 
           {/* Complete State - WhatsApp Style */}
           {isComplete && (
-            <div className="space-y-4 sm:space-y-6">
+            <div className="space-y-3 sm:space-y-4 md:space-y-6">
               {/* Texto sobre os olhos */}
-              <div className="text-center px-2">
-                <p className="text-lg sm:text-xl text-gold font-bold animate-fade-in leading-tight">
+              <div className="text-center px-1 sm:px-2">
+                <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gold font-bold animate-fade-in leading-tight">
                   Já consigo ver os olhos da sua alma gêmea
                 </p>
               </div>
               
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-4 md:gap-6 lg:gap-8">
                 {/* Card Esquerdo - Mensagens WhatsApp */}
-                <div className="bg-black/30 rounded-lg p-4 sm:p-6 border border-gold/20">
-                  <div className="h-64 sm:h-96 overflow-y-auto space-y-4">
+                <div className="bg-black/30 rounded-lg p-3 sm:p-4 md:p-6 border border-gold/20">
+                  <div className="h-48 sm:h-64 md:h-80 lg:h-96 overflow-y-auto space-y-3 sm:space-y-4">
                     {displayedMessages.map((message, index) => (
                       <div key={index} className="flex justify-start">
-                        <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl rounded-tl-sm px-4 py-3 max-w-xs">
-                          <p className="text-white text-sm leading-relaxed">{message}</p>
+                        <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl rounded-tl-sm px-3 sm:px-4 py-2 sm:py-3 max-w-xs">
+                          <p className="text-white text-xs sm:text-sm leading-relaxed">{message}</p>
                         </div>
                       </div>
                     ))}
                     
                     {showTyping && (
                       <div className="flex justify-start">
-                        <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl rounded-tl-sm px-4 py-3 max-w-xs">
+                        <div className="bg-gradient-to-r from-purple-600 to-pink-600 rounded-2xl rounded-tl-sm px-3 sm:px-4 py-2 sm:py-3 max-w-xs">
                           <div className="flex space-x-1">
-                            <div className="w-2 h-2 bg-white rounded-full animate-bounce"></div>
-                            <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                            <div className="w-2 h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
+                            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full animate-bounce"></div>
+                            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
+                            <div className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-white rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
                           </div>
                         </div>
                       </div>
@@ -168,8 +168,8 @@ const SoulmateModal = ({ open, onClose, onComplete }: SoulmateModalProps) => {
                 </div>
 
                 {/* Card Direito - Imagem */}
-                <div className="bg-black/30 rounded-lg p-4 sm:p-6 border border-gold/20 flex flex-col items-center justify-center">
-                  <div className="w-full h-64 sm:h-96 rounded-lg overflow-hidden border-2 border-gold/30 shadow-lg bg-black/20">
+                <div className="bg-black/30 rounded-lg p-3 sm:p-4 md:p-6 border border-gold/20 flex flex-col items-center justify-center">
+                  <div className="w-full h-48 sm:h-64 md:h-80 lg:h-96 rounded-lg overflow-hidden border-2 border-gold/30 shadow-lg bg-black/20">
                     <img 
                       src="/DESENHO ALMA GEMEA.png" 
                       alt="Prévia da Alma Gêmea"
@@ -187,13 +187,13 @@ const SoulmateModal = ({ open, onClose, onComplete }: SoulmateModalProps) => {
 
           {/* Action Button */}
           {isComplete && (
-            <div className="flex justify-center pt-4 sm:pt-6">
+            <div className="flex justify-center pt-3 sm:pt-4 md:pt-6">
               <Button
                 onClick={handleComplete}
                 size="lg"
-                className="bg-gradient-pink hover:opacity-90 transition-smooth shadow-glow px-6 py-3 sm:px-8 sm:py-4 text-base sm:text-lg rounded-full w-full sm:w-auto max-w-xs"
+                className="bg-gradient-pink hover:opacity-90 transition-smooth shadow-glow px-4 sm:px-6 md:px-8 py-2 sm:py-3 md:py-4 text-sm sm:text-base md:text-lg rounded-full w-full sm:w-auto max-w-xs"
               >
-                <Sparkles className="w-5 h-5 mr-2" />
+                <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
                 Sim, Pode Confiar!
               </Button>
             </div>

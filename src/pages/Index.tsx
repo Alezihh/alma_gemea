@@ -67,23 +67,23 @@ const Index = () => {
       ) : (
         <>
           {/* Hero Section */}
-          <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12">
-            <div className="container mx-auto max-w-6xl text-center space-y-4 sm:space-y-6 lg:space-y-8 animate-fade-in-up">
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-display font-bold leading-tight px-2">
+          <section className="min-h-screen flex items-center justify-center px-3 sm:px-6 lg:px-8 pt-12 sm:pt-16 lg:pt-20 pb-6 sm:pb-8">
+            <div className="container mx-auto max-w-6xl text-center space-y-3 sm:space-y-4 md:space-y-6 lg:space-y-8 animate-fade-in-up">
+              <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-display font-bold leading-tight px-2">
                 Descubra Sua{" "}
                 <span className="bg-gradient-to-r from-rose via-secondary to-gold bg-clip-text text-transparent">
                   Alma Gêmea
                 </span>
               </h1>
 
-              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gold max-w-4xl mx-auto leading-relaxed px-4">
+              <p className="text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl text-gold max-w-4xl mx-auto leading-relaxed px-2 sm:px-4">
                 Graças ao Método Serena, revelamos o perfil da pessoa que não apenas combina com você, 
                 mas desperta o amor e a conexão que sua alma sempre buscou.
               </p>
 
               {/* Video do YouTube */}
-              <div className="relative max-w-3xl mx-auto my-6 sm:my-8 px-4">
-                <div className="aspect-video rounded-xl sm:rounded-2xl overflow-hidden border-2 border-primary/30 shadow-glow">
+              <div className="relative max-w-3xl mx-auto my-4 sm:my-6 md:my-8 px-2 sm:px-4">
+                <div className="aspect-video rounded-lg sm:rounded-xl md:rounded-2xl overflow-hidden border-2 border-primary/30 shadow-glow">
                   <iframe
                     className="w-full h-full"
                     src="https://www.youtube.com/embed/UJmFGklL7N4?autoplay=1&mute=1&loop=1&playlist=UJmFGklL7N4&controls=1&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&fs=1&cc_load_policy=0&start=0&end=0&hd=1&vq=hd1080"
@@ -100,22 +100,22 @@ const Index = () => {
               <Button
                 onClick={handleStartJourney}
                 size="lg"
-                className="text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 lg:px-10 py-3 sm:py-4 md:py-5 lg:py-6 bg-foreground hover:bg-foreground/90 transition-smooth hover:scale-105 rounded-full text-background w-full sm:w-auto max-w-xs sm:max-w-sm md:max-w-none"
+                className="text-xs sm:text-sm md:text-base lg:text-lg px-3 sm:px-4 md:px-6 lg:px-8 xl:px-10 py-2 sm:py-3 md:py-4 lg:py-5 xl:py-6 bg-foreground hover:bg-foreground/90 transition-smooth hover:scale-105 rounded-full text-background w-full sm:w-auto max-w-xs sm:max-w-sm md:max-w-none"
               >
-                <Heart className="w-4 h-4 sm:w-5 sm:h-5 mr-2 fill-background" />
+                <Heart className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 mr-2 fill-background" />
                 <span className="text-xs sm:text-sm md:text-base">Começar Minha Jornada</span>
               </Button>
             </div>
           </section>
 
           {/* Testimonials Section */}
-          <section className="py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6">
+          <section className="py-6 sm:py-8 md:py-12 lg:py-16 xl:py-20 px-3 sm:px-4 md:px-6">
             <div className="container mx-auto max-w-7xl">
-              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-display text-center mb-6 sm:mb-8 md:mb-12 text-gold animate-fade-in-up px-2">
+              <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-display text-center mb-4 sm:mb-6 md:mb-8 lg:mb-12 text-gold animate-fade-in-up px-2">
                 Pessoas que encontraram suas almas gêmeas através da nossa análise mística
               </h2>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-3 md:gap-4 lg:gap-6">
                 {[
                   {
                     names: "Fernanda & Daniel",
@@ -151,9 +151,9 @@ const Index = () => {
                     }}
                   >
                     <div className="absolute inset-0 bg-gradient-card opacity-30"></div>
-                    <CardContent className="p-4 sm:p-6 space-y-3 sm:space-y-4 relative z-10">
+                    <CardContent className="p-3 sm:p-4 md:p-6 space-y-2 sm:space-y-3 md:space-y-4 relative z-10">
                       {/* Foto do casal */}
-                      <div className="aspect-square rounded-lg overflow-hidden mb-3 sm:mb-4">
+                      <div className="aspect-square rounded-lg overflow-hidden mb-2 sm:mb-3 md:mb-4">
                         <img 
                           src={testimonial.image} 
                           alt={testimonial.names}
@@ -162,11 +162,11 @@ const Index = () => {
                       </div>
 
                       <div className="flex items-center gap-2 text-primary mb-2 sm:mb-3">
-                        <Heart className="w-4 h-4 sm:w-5 sm:h-5 fill-current" />
-                        <h3 className="text-base sm:text-lg font-semibold">{testimonial.names}</h3>
+                        <Heart className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 fill-current" />
+                        <h3 className="text-sm sm:text-base md:text-lg font-semibold">{testimonial.names}</h3>
                       </div>
 
-                      <p className="text-xs sm:text-sm text-foreground/90 leading-relaxed">
+                      <p className="text-xs sm:text-sm md:text-base text-foreground/90 leading-relaxed">
                         {testimonial.text}{" "}
                         <span className="text-accent font-bold">{testimonial.highlight}</span>{" "}
                         {testimonial.continuation}{" "}
@@ -177,31 +177,31 @@ const Index = () => {
                 ))}
               </div>
 
-              <div className="text-center mt-8 sm:mt-12 px-4">
-                <p className="text-gold text-lg sm:text-xl font-semibold mb-4 sm:mb-6">Você também pode encontrar sua alma gêmea!</p>
+              <div className="text-center mt-6 sm:mt-8 md:mt-12 px-2 sm:px-4">
+                <p className="text-gold text-sm sm:text-base md:text-lg lg:text-xl font-semibold mb-3 sm:mb-4 md:mb-6">Você também pode encontrar sua alma gêmea!</p>
                 <Button
                   onClick={() => scrollToSection("como-funciona")}
                   size="lg"
-                  className="text-base sm:text-lg px-6 sm:px-8 lg:px-10 py-4 sm:py-5 lg:py-6 bg-foreground hover:bg-foreground/90 transition-smooth rounded-full text-background w-full sm:w-auto max-w-xs sm:max-w-none"
+                  className="text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 lg:px-10 py-3 sm:py-4 md:py-5 lg:py-6 bg-foreground hover:bg-foreground/90 transition-smooth rounded-full text-background w-full sm:w-auto max-w-xs sm:max-w-none"
                 >
-                  <Heart className="w-4 h-4 sm:w-5 sm:h-5 mr-2 fill-background" />
-                  <span className="text-sm sm:text-base">Descobrir Minha Alma Gêmea</span>
+                  <Heart className="w-3 h-3 sm:w-4 sm:h-4 md:w-5 md:h-5 mr-2 fill-background" />
+                  <span className="text-xs sm:text-sm md:text-base">Descobrir Minha Alma Gêmea</span>
                 </Button>
               </div>
             </div>
           </section>
 
           {/* How It Works Section */}
-          <section id="como-funciona" className="py-20 px-4">
+          <section id="como-funciona" className="py-12 sm:py-16 md:py-20 px-3 sm:px-4">
             <div className="container mx-auto max-w-5xl">
-              <div className="text-center mb-16 space-y-4 animate-fade-in-up">
-                <h2 className="text-4xl md:text-5xl font-display font-bold">Como Funciona</h2>
-                <p className="text-muted-foreground text-lg">
+              <div className="text-center mb-8 sm:mb-12 md:mb-16 space-y-2 sm:space-y-4 animate-fade-in-up">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold">Como Funciona</h2>
+                <p className="text-muted-foreground text-sm sm:text-base md:text-lg">
                   Um processo simples para descobrir sua conexão perfeita
                 </p>
               </div>
 
-              <div className="grid md:grid-cols-3 gap-8 mb-16">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12 md:mb-16">
                 {[
                   {
                     icon: User,
@@ -227,16 +227,16 @@ const Index = () => {
                 ].map((step, index) => (
                   <div
                     key={index}
-                    className="text-center space-y-4 animate-fade-in-up"
+                    className="text-center space-y-3 sm:space-y-4 animate-fade-in-up"
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
-                    <div className={`w-20 h-20 mx-auto rounded-full bg-gradient-to-br ${step.gradient} flex items-center justify-center shadow-glow`}>
-                      <step.icon className="w-10 h-10 text-white" />
+                    <div className={`w-16 h-16 sm:w-20 sm:h-20 mx-auto rounded-full bg-gradient-to-br ${step.gradient} flex items-center justify-center shadow-glow`}>
+                      <step.icon className="w-8 h-8 sm:w-10 sm:h-10 text-white" />
                     </div>
-                    <h3 className="text-xl font-display font-semibold">
+                    <h3 className="text-lg sm:text-xl font-display font-semibold">
                       {step.number}. {step.title}
                     </h3>
-                    <p className="text-muted-foreground leading-relaxed">{step.description}</p>
+                    <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">{step.description}</p>
                   </div>
                 ))}
               </div>
@@ -244,16 +244,16 @@ const Index = () => {
           </section>
 
           {/* Privacy Section */}
-          <section id="privacidade" className="py-20 px-4">
+          <section id="privacidade" className="py-12 sm:py-16 md:py-20 px-3 sm:px-4">
             <div className="container mx-auto max-w-6xl">
-              <div className="text-center mb-12 space-y-4 animate-fade-in-up">
-                <h2 className="text-4xl md:text-5xl font-display font-bold">
+              <div className="text-center mb-8 sm:mb-10 md:mb-12 space-y-2 sm:space-y-4 animate-fade-in-up">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-display font-bold">
                   Privacidade & Transparência
                 </h2>
-                <p className="text-muted-foreground text-lg">Sua privacidade é nossa prioridade</p>
+                <p className="text-muted-foreground text-sm sm:text-base md:text-lg">Sua privacidade é nossa prioridade</p>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
                 {[
                   {
                     icon: Shield,
@@ -285,12 +285,12 @@ const Index = () => {
                     className="bg-card/50 backdrop-blur-sm border-border/50 hover-lift animate-fade-in-up"
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
-                    <CardContent className="p-8 space-y-4">
+                    <CardContent className="p-4 sm:p-6 md:p-8 space-y-3 sm:space-y-4">
                       <div className={`${item.color}`}>
-                        <item.icon className="w-12 h-12" />
+                        <item.icon className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12" />
                       </div>
-                      <h3 className="text-xl font-display font-semibold">{item.title}</h3>
-                      <p className="text-muted-foreground leading-relaxed">{item.description}</p>
+                      <h3 className="text-lg sm:text-xl font-display font-semibold">{item.title}</h3>
+                      <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">{item.description}</p>
                     </CardContent>
                   </Card>
                 ))}
@@ -299,25 +299,25 @@ const Index = () => {
           </section>
 
           {/* Footer */}
-          <footer className="py-12 px-4 border-t border-border/50">
-            <div className="container mx-auto max-w-4xl text-center space-y-6">
+          <footer className="py-8 sm:py-10 md:py-12 px-3 sm:px-4 border-t border-border/50">
+            <div className="container mx-auto max-w-4xl text-center space-y-4 sm:space-y-6">
               <div className="flex items-center justify-center gap-2">
-                <div className="w-12 h-12 rounded-full bg-foreground/10 flex items-center justify-center">
-                  <Heart className="w-6 h-6 text-foreground fill-foreground" />
+                <div className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 rounded-full bg-foreground/10 flex items-center justify-center">
+                  <Heart className="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 text-foreground fill-foreground" />
                 </div>
-                <span className="font-display text-2xl font-bold text-foreground">
+                <span className="font-display text-lg sm:text-xl md:text-2xl font-bold text-foreground">
                   ALMA GÊMEA
                 </span>
               </div>
 
-              <p className="text-muted-foreground max-w-2xl mx-auto">
+              <p className="text-muted-foreground max-w-2xl mx-auto text-sm sm:text-base">
                 Conectando corações através de uma análise única e personalizada. 
                 Descubra a magia de encontrar sua alma gêmea perfeita.
               </p>
 
-              <div className="pt-6 border-t border-border/30">
-                <p className="text-sm text-muted-foreground">
-                  © 2024 Alma Gêmea. Feito com <Heart className="w-4 h-4 inline text-primary fill-primary" /> para conectar almas.
+              <div className="pt-4 sm:pt-6 border-t border-border/30">
+                <p className="text-xs sm:text-sm text-muted-foreground">
+                  © 2024 Alma Gêmea. Feito com <Heart className="w-3 h-3 sm:w-4 sm:h-4 inline text-primary fill-primary" /> para conectar almas.
                 </p>
               </div>
             </div>

@@ -62,24 +62,24 @@ const CardReveal = ({ selectedCards, onComplete }: CardRevealProps) => {
   }, []);
 
   return (
-    <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-2 sm:p-4">
-      <div className="w-full max-w-5xl mx-4 sm:mx-0">
+    <div className="fixed inset-0 bg-black/90 backdrop-blur-sm z-50 flex items-center justify-center p-1 sm:p-2 md:p-4">
+      <div className="w-full max-w-5xl mx-2 sm:mx-4 md:mx-0">
         {/* Header */}
-        <div className="text-center mb-4 sm:mb-6 md:mb-8">
-          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold text-gold mb-2 sm:mb-4 px-4">
+        <div className="text-center mb-3 sm:mb-4 md:mb-6 lg:mb-8">
+          <h2 className="text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl font-bold text-gold mb-1 sm:mb-2 md:mb-4 px-2 sm:px-4">
             ✨ Suas Cartas Reveladas ✨
           </h2>
-          <p className="text-sm sm:text-base md:text-lg text-white/80">
+          <p className="text-xs sm:text-sm md:text-base lg:text-lg text-white/80">
             {currentCardIndex} de {selectedCards.length} cartas reveladas
           </p>
         </div>
 
         {/* Cards Grid - Mobile: 1 carta por vez, Desktop: grid normal */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-6 sm:mb-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6 lg:gap-8 mb-4 sm:mb-6 md:mb-8">
           {selectedCards.map((card, index) => (
             <div key={card.id} className={`relative ${index > currentCardIndex ? 'hidden sm:block' : ''}`}>
               {/* Card Image Container */}
-              <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[28rem] mb-4 sm:mb-6">
+              <div className="relative w-full h-48 sm:h-64 md:h-80 lg:h-96 xl:h-[28rem] mb-3 sm:mb-4 md:mb-6">
                 {/* Card Container */}
                 <div 
                   className={`relative w-full h-full transition-all duration-1000 transform-style-preserve-3d ${
@@ -126,10 +126,10 @@ const CardReveal = ({ selectedCards, onComplete }: CardRevealProps) => {
 
               {/* Card Content - Only show when revealed */}
               {revealedCards[index] && (
-                <div className="bg-black/30 rounded-lg p-3 sm:p-4 border border-gold/20 animate-fade-in">
-                  <h3 className="text-base sm:text-lg md:text-xl font-bold text-white mb-2 sm:mb-3 text-center">{card.name}</h3>
+                <div className="bg-black/30 rounded-lg p-2 sm:p-3 md:p-4 border border-gold/20 animate-fade-in">
+                  <h3 className="text-sm sm:text-base md:text-lg lg:text-xl font-bold text-white mb-1 sm:mb-2 md:mb-3 text-center">{card.name}</h3>
                   <div 
-                    className="text-xs sm:text-sm text-white/90 leading-relaxed text-center"
+                    className="text-xs sm:text-sm md:text-base text-white/90 leading-relaxed text-center"
                     dangerouslySetInnerHTML={{ __html: processCardContent(card.content) }}
                   />
                 </div>
@@ -139,23 +139,23 @@ const CardReveal = ({ selectedCards, onComplete }: CardRevealProps) => {
         </div>
 
         {/* Action Buttons */}
-        <div className="text-center px-4">
+        <div className="text-center px-2 sm:px-4">
           {!allCardsRevealed ? (
             <Button
               onClick={handleRevealNext}
               disabled={isRevealing}
               size="lg"
-              className="bg-gradient-pink hover:opacity-90 transition-smooth shadow-glow px-6 sm:px-8 py-4 sm:py-5 text-base sm:text-lg rounded-full w-full sm:w-auto max-w-sm"
+              className="bg-gradient-pink hover:opacity-90 transition-smooth shadow-glow px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 text-sm sm:text-base md:text-lg rounded-full w-full sm:w-auto max-w-xs sm:max-w-sm"
             >
               {isRevealing ? (
                 <>
-                  <Sparkles className="w-5 h-5 mr-2 animate-spin" />
-                  <span className="text-sm sm:text-base">Revelando...</span>
+                  <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2 animate-spin" />
+                  <span className="text-xs sm:text-sm md:text-base">Revelando...</span>
                 </>
               ) : (
                 <>
-                  <ArrowRight className="w-5 h-5 mr-2" />
-                  <span className="text-sm sm:text-base">
+                  <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+                  <span className="text-xs sm:text-sm md:text-base">
                     {currentCardIndex === 0 ? "Revelar Primeira Carta" : "Revelar Próxima Carta"}
                   </span>
                 </>
@@ -165,10 +165,10 @@ const CardReveal = ({ selectedCards, onComplete }: CardRevealProps) => {
             <Button
               onClick={onComplete}
               size="lg"
-              className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 transition-smooth shadow-glow px-6 sm:px-8 py-4 sm:py-5 text-base sm:text-lg rounded-full w-full sm:w-auto max-w-sm"
+              className="bg-gradient-to-r from-pink-500 to-purple-500 hover:from-pink-600 hover:to-purple-600 transition-smooth shadow-glow px-4 sm:px-6 md:px-8 py-3 sm:py-4 md:py-5 text-sm sm:text-base md:text-lg rounded-full w-full sm:w-auto max-w-xs sm:max-w-sm"
             >
-              <Sparkles className="w-5 h-5 mr-2" />
-              <span className="text-sm sm:text-base">Ver Minha Alma Gêmea</span>
+              <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+              <span className="text-xs sm:text-sm md:text-base">Ver Minha Alma Gêmea</span>
             </Button>
           )}
         </div>
