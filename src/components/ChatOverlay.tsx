@@ -15,9 +15,8 @@ interface ChatOverlayProps {
 
 const ChatOverlay = ({ isOpen, onClose, onComplete }: ChatOverlayProps) => {
   const [displayedMessages, setDisplayedMessages] = useState<string[]>([]);
-  const [showTyping, setShowTyping] = useState(false);
   const [showFinalButton, setShowFinalButton] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const isRunningRef = useRef<boolean>(false);
 
   // Expor mensagens globalmente
   useEffect(() => {
@@ -42,20 +41,34 @@ const ChatOverlay = ({ isOpen, onClose, onComplete }: ChatOverlayProps) => {
 
   // Scroll automático para o final
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const container = document.querySelector('.h-full.overflow-y-auto');
+    if (container) {
+      container.scrollTop = container.scrollHeight;
+    }
   };
 
   useEffect(() => {
     scrollToBottom();
-  }, [displayedMessages, showTyping, showFinalButton]);
+  }, [displayedMessages, showFinalButton]);
 
   useEffect(() => {
     if (!isOpen) {
       setDisplayedMessages([]);
-      setShowTyping(false);
       setShowFinalButton(false);
+      isRunningRef.current = false;
       return;
     }
+
+    // Evitar execução múltipla
+    if (isRunningRef.current) {
+      return;
+    }
+
+    isRunningRef.current = true;
+
+    // Reset states when opening
+    setDisplayedMessages([]);
+    setShowFinalButton(false);
 
     let messageIndex = 0;
     let timeoutId: NodeJS.Timeout;
@@ -63,19 +76,23 @@ const ChatOverlay = ({ isOpen, onClose, onComplete }: ChatOverlayProps) => {
 
     const showNextMessage = () => {
       if (messageIndex < messages.length) {
-        // Mostrar 3 pontinhos digitando
-        setShowTyping(true);
-        
         // Após 1.2 segundos, mostrar a mensagem completa
         timeoutId = setTimeout(() => {
-          setDisplayedMessages(prev => [...prev, messages[messageIndex]]);
-          setShowTyping(false);
+          setDisplayedMessages(prev => {
+            // Verificar se a mensagem já existe para evitar duplicação
+            const messageExists = prev.some(msg => msg === messages[messageIndex]);
+            if (messageExists) {
+              return prev;
+            }
+            return [...prev, messages[messageIndex]];
+          });
           messageIndex++;
           
           // Se é a última mensagem, mostrar botão após delay
           if (messageIndex === messages.length) {
             setTimeout(() => {
               setShowFinalButton(true);
+              isRunningRef.current = false;
             }, 1000);
           } else {
             // Agendar próxima mensagem
@@ -91,6 +108,7 @@ const ChatOverlay = ({ isOpen, onClose, onComplete }: ChatOverlayProps) => {
     return () => {
       if (timeoutId) clearTimeout(timeoutId);
       if (intervalId) clearTimeout(intervalId);
+      isRunningRef.current = false;
     };
   }, [isOpen]);
 
@@ -122,23 +140,6 @@ const ChatOverlay = ({ isOpen, onClose, onComplete }: ChatOverlayProps) => {
             </div>
           ))}
           
-          {/* Indicador de digitação */}
-          {showTyping && (
-            <div 
-              className="flex items-start justify-start animate-fade-in-up"
-              style={{ 
-                animation: 'fadeInUp 0.5s ease-out forwards'
-              }}
-            >
-              <div className="bg-white/10 backdrop-blur-xl rounded-2xl border border-white/20 px-4 py-3 max-w-[85%] shadow-[0_6px_18px_rgba(0,0,0,0.25)]">
-                <div className="flex space-x-2">
-                  <div className="w-2 h-2 bg-white/70 rounded-full animate-bounce"></div>
-                  <div className="w-2 h-2 bg-white/70 rounded-full animate-bounce" style={{ animationDelay: '0.1s' }}></div>
-                  <div className="w-2 h-2 bg-white/70 rounded-full animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-                </div>
-              </div>
-            </div>
-          )}
 
           {/* Botão final - centralizado horizontalmente */}
           {showFinalButton && (
@@ -162,8 +163,6 @@ const ChatOverlay = ({ isOpen, onClose, onComplete }: ChatOverlayProps) => {
             </div>
           )}
 
-          {/* Elemento para scroll automático */}
-          <div ref={messagesEndRef} />
         </div>
       </div>
     </div>
