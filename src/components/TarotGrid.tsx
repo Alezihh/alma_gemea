@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import TarotCard from "./TarotCard";
 import TarotModal from "./TarotModal";
+import CardReveal from "./CardReveal";
+import SoulmateModal from "./SoulmateModal";
 import { shuffleCards, TAROT_CARDS, TarotCard as TarotCardType } from "@/lib/tarot";
 import { Shuffle, Sparkles } from "lucide-react";
 import { toast } from "sonner";
@@ -15,7 +17,9 @@ interface TarotGridProps {
 export default function TarotGrid({ questionnaireData }: TarotGridProps) {
   const [cards] = useState<TarotCardType[]>(() => shuffleCards(TAROT_CARDS).slice(0, 8));
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
-  const [showModal, setShowModal] = useState(false);
+  const [showCardReveal, setShowCardReveal] = useState(false);
+  const [showSoulmateModal, setShowSoulmateModal] = useState(false);
+  const [showTarotModal, setShowTarotModal] = useState(false);
 
   const handleCardToggle = (index: number) => {
     setSelectedCards((prev) => {
@@ -36,8 +40,18 @@ export default function TarotGrid({ questionnaireData }: TarotGridProps) {
 
   const handleReveal = () => {
     if (selectedCards.length === 3) {
-      setShowModal(true);
+      setShowCardReveal(true);
     }
+  };
+
+  const handleCardRevealComplete = () => {
+    setShowCardReveal(false);
+    setShowSoulmateModal(true);
+  };
+
+  const handleSoulmateModalComplete = () => {
+    setShowSoulmateModal(false);
+    setShowTarotModal(true);
   };
 
   const selected = selectedCards.map((index) => cards[index]);
@@ -148,7 +162,28 @@ export default function TarotGrid({ questionnaireData }: TarotGridProps) {
         </p>
       </div>
 
-      <TarotModal open={showModal} onClose={() => setShowModal(false)} selectedCards={selected} questionnaireData={questionnaireData} />
+      {/* Card Reveal Modal */}
+      {showCardReveal && (
+        <CardReveal 
+          selectedCards={selected} 
+          onComplete={handleCardRevealComplete} 
+        />
+      )}
+
+      {/* Soulmate Modal */}
+      <SoulmateModal 
+        open={showSoulmateModal} 
+        onClose={() => setShowSoulmateModal(false)}
+        onComplete={handleSoulmateModalComplete}
+      />
+
+      {/* Tarot Modal */}
+      <TarotModal 
+        open={showTarotModal} 
+        onClose={() => setShowTarotModal(false)} 
+        selectedCards={selected} 
+        questionnaireData={questionnaireData} 
+      />
     </div>
   );
 }

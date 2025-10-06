@@ -4,8 +4,6 @@ import { TarotCard as TarotCardType } from "@/lib/tarot";
 import { Sparkles } from "lucide-react";
 // Removed Purchase tracking as requested
 import { QuestionnaireData } from "@/hooks/useQuestionnaire";
-import TrustMessages from "./TrustMessages";
-import { useState } from "react";
 
 interface TarotModalProps {
   open: boolean;
@@ -15,20 +13,10 @@ interface TarotModalProps {
 }
 
 const TarotModal = ({ open, onClose, selectedCards, questionnaireData }: TarotModalProps) => {
-  const [showTrustMessages, setShowTrustMessages] = useState(false);
-
   const handlePaymentClick = () => {
-    setShowTrustMessages(true);
-  };
-
-  const handleTrustComplete = () => {
     // Direct link to payment (no tracking)
     window.open("https://pay.kirvano.com/e4c41901-7afa-47a8-a3ea-160341cc2d01", "_blank");
   };
-
-  if (showTrustMessages) {
-    return <TrustMessages onComplete={handleTrustComplete} />;
-  }
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
