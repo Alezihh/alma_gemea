@@ -90,3 +90,4 @@ CREATE POLICY "Allow public read" ON users FOR SELECT USING (true);`;
     </div>
   );
 }
+

@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import Navbar from "@/components/Navbar";
 import QuestionnaireModal from "@/components/QuestionnaireModal";
 import TarotGrid from "@/components/TarotGrid";
 import { Heart, Shield, Eye, Clock, UserCheck, User, Wand2, Share2 } from "lucide-react";
@@ -38,7 +37,6 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-      <Navbar />
 
       {/* Decorative floating hearts */}
       <div className="fixed left-12 top-1/4 animate-pulse opacity-20 hidden xl:block">
@@ -69,16 +67,16 @@ const Index = () => {
       ) : (
         <>
           {/* Hero Section */}
-          <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-20 sm:pt-24 pb-8 sm:pb-12">
-            <div className="container mx-auto max-w-5xl text-center space-y-6 sm:space-y-8 animate-fade-in-up">
-              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-display font-bold leading-tight px-2">
+          <section className="min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 lg:pt-24 pb-8 sm:pb-12">
+            <div className="container mx-auto max-w-6xl text-center space-y-4 sm:space-y-6 lg:space-y-8 animate-fade-in-up">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl 2xl:text-7xl font-display font-bold leading-tight px-2">
                 Descubra Sua{" "}
                 <span className="bg-gradient-to-r from-rose via-secondary to-gold bg-clip-text text-transparent">
                   Alma Gêmea
                 </span>
               </h1>
 
-              <p className="text-base sm:text-lg md:text-xl text-gold max-w-3xl mx-auto leading-relaxed px-4">
+              <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gold max-w-4xl mx-auto leading-relaxed px-4">
                 Graças ao Método Serena, revelamos o perfil da pessoa que não apenas combina com você, 
                 mas desperta o amor e a conexão que sua alma sempre buscou.
               </p>
@@ -102,22 +100,22 @@ const Index = () => {
               <Button
                 onClick={handleStartJourney}
                 size="lg"
-                className="text-base sm:text-lg px-6 sm:px-8 lg:px-10 py-4 sm:py-5 lg:py-7 bg-foreground hover:bg-foreground/90 transition-smooth hover:scale-105 rounded-full text-background w-full sm:w-auto max-w-xs sm:max-w-none"
+                className="text-sm sm:text-base md:text-lg px-4 sm:px-6 md:px-8 lg:px-10 py-3 sm:py-4 md:py-5 lg:py-6 bg-foreground hover:bg-foreground/90 transition-smooth hover:scale-105 rounded-full text-background w-full sm:w-auto max-w-xs sm:max-w-sm md:max-w-none"
               >
                 <Heart className="w-4 h-4 sm:w-5 sm:h-5 mr-2 fill-background" />
-                <span className="text-sm sm:text-base">Começar Minha Jornada</span>
+                <span className="text-xs sm:text-sm md:text-base">Começar Minha Jornada</span>
               </Button>
             </div>
           </section>
 
           {/* Testimonials Section */}
-          <section className="py-12 sm:py-16 lg:py-20 px-4 sm:px-6">
-            <div className="container mx-auto max-w-6xl">
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-display text-center mb-8 sm:mb-12 text-gold animate-fade-in-up px-4">
+          <section className="py-8 sm:py-12 md:py-16 lg:py-20 px-4 sm:px-6">
+            <div className="container mx-auto max-w-7xl">
+              <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-display text-center mb-6 sm:mb-8 md:mb-12 text-gold animate-fade-in-up px-2">
                 Pessoas que encontraram suas almas gêmeas através da nossa análise mística
               </h2>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
                 {[
                   {
                     names: "Fernanda & Daniel",
@@ -153,9 +151,9 @@ const Index = () => {
                     }}
                   >
                     <div className="absolute inset-0 bg-gradient-card opacity-30"></div>
-                    <CardContent className="p-6 space-y-4 relative z-10">
+                    <CardContent className="p-4 sm:p-6 space-y-3 sm:space-y-4 relative z-10">
                       {/* Foto do casal */}
-                      <div className="aspect-square rounded-lg overflow-hidden mb-4">
+                      <div className="aspect-square rounded-lg overflow-hidden mb-3 sm:mb-4">
                         <img 
                           src={testimonial.image} 
                           alt={testimonial.names}
@@ -163,12 +161,12 @@ const Index = () => {
                         />
                       </div>
 
-                      <div className="flex items-center gap-2 text-primary mb-3">
-                        <Heart className="w-5 h-5 fill-current" />
-                        <h3 className="text-lg font-semibold">{testimonial.names}</h3>
+                      <div className="flex items-center gap-2 text-primary mb-2 sm:mb-3">
+                        <Heart className="w-4 h-4 sm:w-5 sm:h-5 fill-current" />
+                        <h3 className="text-base sm:text-lg font-semibold">{testimonial.names}</h3>
                       </div>
 
-                      <p className="text-sm text-foreground/90 leading-relaxed">
+                      <p className="text-xs sm:text-sm text-foreground/90 leading-relaxed">
                         {testimonial.text}{" "}
                         <span className="text-accent font-bold">{testimonial.highlight}</span>{" "}
                         {testimonial.continuation}{" "}

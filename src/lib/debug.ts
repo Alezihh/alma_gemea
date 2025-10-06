@@ -21,3 +21,4 @@ export const debugSupabase = () => {
 
 // Call this in the browser console to debug
 (window as any).debugSupabase = debugSupabase;
+

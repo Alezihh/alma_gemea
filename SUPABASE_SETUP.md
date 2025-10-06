@@ -76,3 +76,4 @@ Os seguintes dados são coletados e salvos:
 - Qualquer pessoa pode inserir dados (para o formulário funcionar)
 - Qualquer pessoa pode ler dados (para futuras funcionalidades)
 - Os dados são únicos por email (evita duplicatas)
+

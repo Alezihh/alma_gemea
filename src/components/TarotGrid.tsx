@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import TarotCard from "./TarotCard";
-import TarotModal from "./TarotModal";
 import CardReveal from "./CardReveal";
 import SoulmateModal from "./SoulmateModal";
 import { shuffleCards, TAROT_CARDS, TarotCard as TarotCardType } from "@/lib/tarot";
@@ -19,7 +18,6 @@ export default function TarotGrid({ questionnaireData }: TarotGridProps) {
   const [selectedCards, setSelectedCards] = useState<number[]>([]);
   const [showCardReveal, setShowCardReveal] = useState(false);
   const [showSoulmateModal, setShowSoulmateModal] = useState(false);
-  const [showTarotModal, setShowTarotModal] = useState(false);
 
   const handleCardToggle = (index: number) => {
     setSelectedCards((prev) => {
@@ -51,7 +49,8 @@ export default function TarotGrid({ questionnaireData }: TarotGridProps) {
 
   const handleSoulmateModalComplete = () => {
     setShowSoulmateModal(false);
-    setShowTarotModal(true);
+    // Ir direto para o pagamento sem mostrar o modal de navegação
+    window.open("https://pay.kirvano.com/e4c41901-7afa-47a8-a3ea-160341cc2d01", "_blank");
   };
 
   const selected = selectedCards.map((index) => cards[index]);
@@ -74,15 +73,15 @@ export default function TarotGrid({ questionnaireData }: TarotGridProps) {
       </div>
 
       {/* Cards Grid - 4 em cima, 4 embaixo */}
-      <div className="space-y-6 mb-12">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 justify-items-center">
+      <div className="space-y-4 sm:space-y-6 mb-8 sm:mb-12">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-6 justify-items-center">
           {cards.slice(0, 4).map((card, index) => (
             <div key={card.id} className="relative">
               <button
                 onClick={() => handleCardToggle(index)}
                 aria-pressed={selectedCards.includes(index)}
                 className={`
-                  w-32 h-44 md:w-36 md:h-52 rounded-lg overflow-hidden
+                  w-28 h-40 sm:w-32 sm:h-44 md:w-36 md:h-52 rounded-lg overflow-hidden
                   border-4 transition-all duration-300 cursor-pointer
                   hover:scale-110 hover:-translate-y-3 hover:rotate-2
                   focus:outline-none focus:ring-4 focus:ring-primary/50
@@ -108,14 +107,14 @@ export default function TarotGrid({ questionnaireData }: TarotGridProps) {
             </div>
           ))}
         </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 justify-items-center">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 md:gap-6 justify-items-center">
           {cards.slice(4, 8).map((card, index) => (
             <div key={card.id} className="relative">
               <button
                 onClick={() => handleCardToggle(index + 4)}
                 aria-pressed={selectedCards.includes(index + 4)}
                 className={`
-                  w-32 h-44 md:w-36 md:h-52 rounded-lg overflow-hidden
+                  w-28 h-40 sm:w-32 sm:h-44 md:w-36 md:h-52 rounded-lg overflow-hidden
                   border-4 transition-all duration-300 cursor-pointer
                   hover:scale-110 hover:-translate-y-3 hover:rotate-2
                   focus:outline-none focus:ring-4 focus:ring-primary/50
@@ -149,13 +148,15 @@ export default function TarotGrid({ questionnaireData }: TarotGridProps) {
           onClick={handleReveal}
           disabled={selectedCards.length !== 3}
           size="lg"
-          className="w-full max-w-md bg-gradient-pink hover:opacity-90 transition-smooth shadow-glow disabled:opacity-30 disabled:cursor-not-allowed py-7 text-lg rounded-full"
+          className="w-full max-w-sm sm:max-w-md bg-gradient-pink hover:opacity-90 transition-smooth shadow-glow disabled:opacity-30 disabled:cursor-not-allowed py-4 sm:py-6 md:py-7 text-sm sm:text-base md:text-lg rounded-full"
         >
-          <Sparkles className="w-5 h-5 mr-2" />
-          {selectedCards.length === 3 ? "Revelar Minhas Cartas" : "Selecione 3 cartas"}
+          <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 mr-2" />
+          <span className="text-xs sm:text-sm md:text-base">
+            {selectedCards.length === 3 ? "Revelar Minhas Cartas" : "Selecione 3 cartas"}
+          </span>
         </Button>
 
-        <p className="text-sm text-gold text-center">
+        <p className="text-xs sm:text-sm text-gold text-center px-4">
           {selectedCards.length === 3 
             ? "Perfeito! Clique para revelar suas cartas" 
             : "Escolha 3 cartas para continuar"}
@@ -177,13 +178,6 @@ export default function TarotGrid({ questionnaireData }: TarotGridProps) {
         onComplete={handleSoulmateModalComplete}
       />
 
-      {/* Tarot Modal */}
-      <TarotModal 
-        open={showTarotModal} 
-        onClose={() => setShowTarotModal(false)} 
-        selectedCards={selected} 
-        questionnaireData={questionnaireData} 
-      />
     </div>
   );
 }
