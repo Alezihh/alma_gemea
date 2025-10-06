@@ -70,7 +70,7 @@ const CardReveal = ({ selectedCards, onComplete }: CardRevealProps) => {
         {/* Card Container - Mobile: 1 carta por vez */}
         <div className="mb-8">
           {/* Card Image - Full Size */}
-          <div className="relative w-full h-80 mb-4">
+          <div className="relative w-full h-96 mb-4">
             <div 
               className={`relative w-full h-full transition-all duration-1000 transform-style-preserve-3d ${
                 isCardRevealed ? 'rotate-y-180' : 'rotate-y-0'
@@ -81,7 +81,7 @@ const CardReveal = ({ selectedCards, onComplete }: CardRevealProps) => {
                 <img 
                   src={tarotCardBack} 
                   alt="Tarot Card Back" 
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain bg-gradient-to-br from-purple-900 to-indigo-900"
                 />
                 {isRevealing && (
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-center justify-center">
@@ -95,7 +95,7 @@ const CardReveal = ({ selectedCards, onComplete }: CardRevealProps) => {
                 <img 
                   src={currentCard.image} 
                   alt={currentCard.name}
-                  className="w-full h-full object-contain bg-black/20"
+                  className="w-full h-full object-cover"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'%3E%3Crect width='300' height='400' fill='%23633c88'/%3E%3Ctext x='150' y='200' text-anchor='middle' fill='%23ec4899' font-family='serif' font-size='24'%3E" + currentCard.name + "%3C/text%3E%3C/svg%3E";
