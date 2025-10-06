@@ -77,3 +77,5 @@ Os seguintes dados são coletados e salvos:
 - Qualquer pessoa pode ler dados (para futuras funcionalidades)
 - Os dados são únicos por email (evita duplicatas)
 
+
+
