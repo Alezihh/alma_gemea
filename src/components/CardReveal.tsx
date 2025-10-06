@@ -81,7 +81,7 @@ const CardReveal = ({ selectedCards, onComplete }: CardRevealProps) => {
                 <img 
                   src={tarotCardBack} 
                   alt="Tarot Card Back" 
-                  className="w-full h-full object-contain bg-gradient-to-br from-purple-900 to-indigo-900"
+                  className="w-full h-full object-cover"
                 />
                 {isRevealing && (
                   <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-center justify-center">
